@@ -20,20 +20,20 @@ repositories {
 }
 
 sourceSets {
-	r2dbcSupport {
+	r2dbc {
 		compileClasspath += main.output
 		runtimeClasspath += main.output
 	}
 }
 
 java {
-	registerFeature('r2dbcSupport') {
-		usingSourceSet(sourceSets.r2dbcSupport)
+	registerFeature('r2dbc') {
+		usingSourceSet(sourceSets.r2dbc)
 	}
 }
 
-tasks.compileJava.finalizedBy compileR2dbcSupportJava
-tasks.jar.finalizedBy r2dbcSupportJar
+tasks.compileJava.finalizedBy compileR2dbcJava
+tasks.jar.finalizedBy r2dbcJar
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -48,13 +48,13 @@ dependencies {
 
 	annotationProcessor 'org.projectlombok:lombok'
 
-	r2dbcSupportImplementation sourceSets.main.output
-	r2dbcSupportImplementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-	r2dbcSupportImplementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-	r2dbcSupportImplementation "com.github.java-json-tools:json-patch:${versions.json_patch}"
-	r2dbcSupportImplementation 'io.r2dbc:r2dbc-h2'
-	r2dbcSupportCompileOnly 'org.projectlombok:lombok'
-	r2dbcSupportAnnotationProcessor 'org.projectlombok:lombok'
+	r2dbcImplementation sourceSets.main.output
+	r2dbcImplementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	r2dbcImplementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	r2dbcImplementation "com.github.java-json-tools:json-patch:${versions.json_patch}"
+	r2dbcImplementation 'io.r2dbc:r2dbc-h2'
+	r2dbcCompileOnly 'org.projectlombok:lombok'
+	r2dbcAnnotationProcessor 'org.projectlombok:lombok'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
